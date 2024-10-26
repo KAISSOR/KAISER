@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>قائمة مهام</title>
+    <style>
+        body {
+            background-color: black;
+            color: #91e506;
+            font-family: Arial, sans-serif;
+        }
+        .task-input {
+            width: 70vw;
+            padding: 20px;
+            margin: 40px;
+            font-size: 60px;
+            border-radius: 30px;
+        }
+        .add-task{
+            margin: 40px;
+            padding: 20px;
+            font-size: 60px;
+            background-color: #91e506;
+            border-radius: 30px; 
+            margin: 40px;
+
+        }
+        .task-list {
+            list-style: none;
+            padding: 0;
+            font-size: 60px;
+        }
+        .task {
+            margin: 40px;
+            padding: 20px;
+            background-color: #222;
+            color: #91e506;
+            padding: 50px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 60px;
+            border-radius: 30px; 
+
+        }
+        .delete-btn {
+            height: 150px;
+            width: 180px;
+            cursor: pointer;
+            font-size: 60px;
+            background-color: #ff2727;
+            color: white;
+            border-radius: 30px; 
+
+
+        }
+        .task {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+        }
+
+        .task-date {
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .task-text {
+            text-decoration: underline;
+            text-decoration-color: blue; /* لون الخط تحت النص أزرق */
+            text-decoration-thickness: 2px; /* سمك الخط تحت النص 2 بكسل */
+        }
+
+    </style>
+</head>
+<body>
+    <input type="text" class="task-input" placeholder="Add new task">
+    <button class="add-task" onclick="addTask()">Add</button>
+    <ul class="task-list" id="taskList"></ul>
+
+    <script>
+        const taskInput = document.querySelector('.task-input');
+        const taskList = document.getElementById('taskList');
+
+        const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        if (storedTasks.length > 0) {
+            storedTasks.forEach(task => {
+                const li = document.createElement('li');
+                li.classList.add('task');
+                li.textContent = task;
+
+                // إضافة زر حذف
+                const deleteBtn = document.createElement('button');
+                deleteBtn.classList.add('delete-btn');
+                deleteBtn.textContent = 'حذف';
+                deleteBtn.onclick = () => {
+                    li.remove();
+                    removeTaskFromStorage(task);
+                };
+                li.appendChild(deleteBtn);
+
+                taskList.appendChild(li);
+            });
+        } else {
+            const noTasksMessage = document.createElement('li');
+            noTasksMessage.textContent = 'لا توجد مهام قديمة';
+            taskList.appendChild(noTasksMessage);
+        }
+        function addTask() {
+            const taskText = taskInput.value;
+            if (taskText === '') return;
+
+            // الحصول على التاريخ والوقت الحالي
+            const now = new Date();
+            const options = { month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+            const formattedDate = now.toLocaleString( options); // 'ar-EG' لتحديد اللغة العربية المصرية
+
+            const li = document.createElement('li');
+            li.classList.add('task');
+            li.innerHTML = `
+            <div class="task_div">
+            <p class="task-date">${formattedDate}</p><hr>
+            <p class="task-text">${taskText}</p>
+            </div>
+            `;
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.classList.add('delete-btn');
+            deleteBtn.textContent = 'Delete';
+            deleteBtn.onclick = () => {
+                li.remove();
+                removeTaskFromStorage(taskText);
+            };
+            li.appendChild(deleteBtn);
+            taskList.appendChild(li);
+
+            // حفظ المهام في الـ Local Storage
+            storedTasks.push(`${formattedDate}: ${taskText}`);
+            localStorage.setItem('tasks', JSON.stringify(storedTasks));
+
+            taskInput.value = '';
+        }
+
+        function removeTaskFromStorage(taskText) {
+            const index = storedTasks.indexOf(taskText);
+            if (index !== -1) {
+                storedTasks.splice(index, 1);
+                localStorage.setItem('tasks', JSON.stringify(storedTasks));
+            }
+        }
+    </script>
+</body>
+</html>
