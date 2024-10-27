@@ -46,9 +46,11 @@
 
           <div class="header__btns">
             <button class="btn">Tasks</button>
-            <audio id="myAudio" src="./Static/Jarvis sound(MP3_128K).mp3" preload="auto" autoplay></audio>
-            <button class="btn" onclick="pauseAudio()">Mute</button> 
+            <audio id="myAudio" src="./Static/Jarvis sound(MP3_128K).mp3"></audio>
+            <button class="btn" onclick="toggleAudio()">Mute</button>
           </div>
+          <audio id="myAudio1" src="./Static/Jarvis sound(MP3_128K).mp3"></audio>
+          <audio id="myAudio2" src="./Static/Jarvis sound(MP3_128K).mp3" autoplay></audio>
 
         </div>
         <div class="header__image">
@@ -252,8 +254,34 @@
       </div>
     </footer>
 
+    <script>
+      const audio = document.getElementById("myAudio1");
+      audio.play();
+    </script>
+    <script>
+        let isAudioPlaying = false;
 
-    <script> const audio = document.getElementById("myAudio"); function pauseAudio() {audio.pause();}</script>
+        function toggleAudio() {
+          const audio = document.getElementById('myAudio');
+          if (isAudioPlaying) {
+            audio.pause();
+            isAudioPlaying = false;
+          } else {
+            audio.play();
+            isAudioPlaying = true;
+          }
+        }
+
+        // تشغيل الصوت مرة واحدة فقط عند تحميل الصفحة
+        window.onload = () => {
+          const audio = document.getElementById('myAudio');
+          if (!isAudioPlaying) {
+            audio.play();
+            isAudioPlaying = true;
+          }
+        };
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="main.js"></script>
