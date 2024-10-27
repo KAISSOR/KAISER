@@ -155,7 +155,16 @@ nav {
 .nav__btns {
   display: none;
 }
-
+.back-btn-header{
+  color: rgb(86, 86, 86);
+  font-size: 30px;
+  background-color: #91e506;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 8px;
+  border-radius: 50px;
+  width: 50px;
+}
 
 
 
@@ -165,7 +174,7 @@ nav {
 }
 .header__content h1 {
   margin-bottom: 1rem;
-  font-size: 4.75rem;
+  font-size: 4rem;
   font-weight: 600;
   font-family: var(--header-font);
   line-height: 5rem;
@@ -623,5 +632,76 @@ nav {
   .footer__links {
     gap: 2rem;
   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.task-input {
+  width: 80vw;
+  padding: 20px;
+  margin-left: 40px;
+  margin-top: 80px;
+  font-size: 20px;
+  border-radius: 10px;
+  font-family: "Noto Kufi Arabic", sans-serif;
+}
+.add-task{
+  margin-left: 40px;
+  margin-top: 10px;
+  padding: 20px;
+  font-size: 20px;
+  background-color: #91e506;
+  border-radius: 10px; 
+  font-family: "Noto Kufi Arabic", sans-serif;
+}
+.task-list {
+  color: #666;
+  margin: 20px;
+  margin-top: 20px;
+  list-style: none;
+  padding: 0;
+  font-size: 20px;
+  font-family: "Noto Kufi Arabic", sans-serif;
+}
+.task {
+  font-family: "Noto Kufi Arabic", sans-serif;
+  background-color: #222;
+  color: #ffffff;
+  padding: 50px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  border-radius: 20px; 
+  border: 1px solid #000000;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.tasks {
+  width: 20px;
+}
+
+.delete-btn {
+  height: 60px;
+  width: 100px;
+  font-size: 20px;
+  background-color: #ff4343;
+  color: white;
+  border-radius: 10px; 
+  
 }
 
